@@ -1,0 +1,54 @@
+<div class="login-container">
+  <div class="header-login">
+    <h2>Inicio de Sesión</h2>
+    <p>Ingresa tus credenciales para continuar</p>
+  </div>
+
+  <form (ngSubmit)="onSubmit()" #loginForm="ngForm" class="login-form">
+    <div class="form-group">
+      <label for="email" class="form-label">Email</label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        [(ngModel)]="userData.email"
+        #email="ngModel"
+        required
+        email
+        class="form-control"
+        (focus)="focusLabel($event)"
+        (blur)="blurLabel($event)"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="password" class="form-label">Contraseña</label>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        [(ngModel)]="userData.password"
+        #password="ngModel"
+        required
+        minlength="6"
+        class="form-control"
+        (focus)="focusLabel($event)"
+        (blur)="blurLabel($event)"
+      />
+    </div>
+
+    <button type="submit" class="btn">Iniciar sesión</button>
+
+    <div *ngIf="errorMessage" class="alert alert-error">
+      {{ errorMessage }}
+    </div>
+
+    <div *ngIf="successMessage" class="alert alert-success">
+      {{ successMessage }}
+    </div>
+  </form>
+
+  <p class="login-link">
+    ¿No tienes cuenta? <a routerLink="/register" class="link-login">Regístrate</a>
+  </p>
+</div>
