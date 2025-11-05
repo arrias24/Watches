@@ -1,1 +1,141 @@
-<p>home works!</p>
+<div class="container">
+  <div class="header">
+    <div class="container-button">
+      <button
+        class="btn btn-current-time"
+        [class.active]="!isCustomTimeActive && !showDate"
+        (click)="setCurrentTime()"
+      >
+        Hora Actual
+      </button>
+      <button class="btn btn-current-date" [class.active]="showDate" (click)="setCurrentDate()">
+        Fecha Actual
+      </button>
+    </div>
+
+    <div class="container-select-time">
+      <div class="input-container">
+        <label class="label-input label-hours">Horas</label>
+        <input
+          type="number"
+          min="1"
+          max="12"
+          placeholder="HH"
+          class="input-time"
+          [value]="selectedTime.hours"
+          (change)="onTimeChange('hours', $event.target.value)"
+        />
+      </div>
+
+      <span class="pointer-time">:</span>
+
+      <div class="input-container">
+        <label class="label-input label-minutes">Minutos</label>
+        <input
+          type="number"
+          min="0"
+          max="59"
+          placeholder="MM"
+          class="input-time"
+          [value]="selectedTime.minutes"
+          (change)="onTimeChange('minutes', $event.target.value)"
+        />
+      </div>
+
+      <span class="pointer-time">:</span>
+
+      <div class="input-container">
+        <label class="label-input label-seconds">Segundos</label>
+        <input
+          type="number"
+          min="0"
+          max="59"
+          placeholder="SS"
+          class="input-time"
+          [value]="selectedTime.seconds"
+          (change)="onTimeChange('seconds', $event.target.value)"
+        />
+      </div>
+
+      <span class="pointer-time">:</span>
+
+      <div class="input-container">
+        <label class="label-input">AM/PM</label>
+        <select
+          class="period-select"
+          [value]="selectedTime.period"
+          (change)="onPeriodChange($any($event.target).value)"
+        >
+          <option value="AM">AM</option>
+          <option value="PM">PM</option>
+        </select>
+      </div>
+
+      <button
+        class="btn btn-add-time"
+        [class.active]="isCustomTimeActive && !showDate"
+        (click)="addCustomTime()"
+      >
+        {{ 'Establecer' }}
+      </button>
+    </div>
+  </div>
+
+  <div class="container-clock">
+    <div class="container-clock-time">
+      <h1 [class]="getDisplayClass()">
+        {{ getDisplayContent() }}
+      </h1>
+      <div *ngIf="isCustomTimeActive && !showDate" class="clock-status"></div>
+    </div>
+
+    <div class="clock-show">
+      <app-digital-clock
+        *ngIf="selectedClock.type === 'digital'"
+        [time]="getTimeContent()"
+        [date]="currentDate"
+        [showDate]="showDate"
+        [isCustomTime]="isCustomTimeActive && !showDate"
+      >
+      </app-digital-clock>
+
+      <div *ngIf="selectedClock.type !== 'digital'" class="clock-placeholder">
+        <div class="selected-clock-info">
+          <h2>{{ selectedClock.name }}</h2>
+          <p>Tipo: {{ selectedClock.type }}</p>
+          <p>ID: {{ selectedClock.id }}</p>
+          <p>
+            Modo:
+            <span *ngIf="showDate">Fecha Actual</span>
+            <span *ngIf="!showDate && isCustomTimeActive" class="custom-mode">
+              Hora Personalizada
+            </span>
+            <span *ngIf="!showDate && !isCustomTimeActive">Tiempo Real</span>
+          </p>
+
+          <div class="clock-preview">
+            <p>Vista previa del {{ selectedClock.name }}</p>
+            <div class="time-details">
+              <p>Hora: {{ currentTime }}</p>
+              <p>Fecha: {{ currentDate }}</p>
+              <p *ngIf="isCustomTimeActive && !showDate" class="custom-time-info">
+                ⚙️ Hora personalizada activa
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-clocks">
+    <div
+      *ngFor="let clock of clockTypes"
+      class="clock-title"
+      [class.active]="clock.id === selectedClock.id"
+      (click)="selectClock(clock)"
+    >
+      <span class="clock-name">{{ clock.name }}</span>
+    </div>
+  </div>
+</div>
