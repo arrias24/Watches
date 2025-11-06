@@ -1,0 +1,65 @@
+<div class="pomodoro-clock" [class.custom-time]="isCustomTime">
+  <div class="clock-container">
+    <div class="time-circle hour-circle">
+      <svg class="progress-ring" width="120" height="120">
+        <circle class="progress-ring-background" cx="60" cy="60" r="54" stroke-width="8"></circle>
+        <circle
+          class="progress-ring-circle"
+          cx="60"
+          cy="60"
+          r="54"
+          stroke-width="8"
+          [attr.stroke-dasharray]="circumference"
+          [attr.stroke-dashoffset]="getStrokeDashoffset(hoursProgress)"
+        ></circle>
+      </svg>
+      <div class="time-value">
+        <span class="number">{{ displayHours }}</span>
+        <span class="label">HORAS</span>
+      </div>
+    </div>
+
+    <div class="time-circle minute-circle">
+      <svg class="progress-ring" width="120" height="120">
+        <circle class="progress-ring-background" cx="60" cy="60" r="54" stroke-width="8"></circle>
+        <circle
+          class="progress-ring-circle"
+          cx="60"
+          cy="60"
+          r="54"
+          stroke-width="8"
+          [attr.stroke-dasharray]="circumference"
+          [attr.stroke-dashoffset]="getStrokeDashoffset(minutesProgress)"
+        ></circle>
+      </svg>
+      <div class="time-value">
+        <span class="number">{{ displayMinutes }}</span>
+        <span class="label">MINUTOS</span>
+      </div>
+    </div>
+
+    <div class="time-circle second-circle">
+      <svg class="progress-ring" width="120" height="120">
+        <circle class="progress-ring-background" cx="60" cy="60" r="54" stroke-width="8"></circle>
+        <circle
+          class="progress-ring-circle"
+          cx="60"
+          cy="60"
+          r="54"
+          stroke-width="8"
+          [attr.stroke-dasharray]="circumference"
+          [attr.stroke-dashoffset]="getStrokeDashoffset(secondsProgress)"
+        ></circle>
+      </svg>
+      <div class="time-value">
+        <span class="number">{{ displaySeconds }}</span>
+        <span class="label">SEGUNDOS</span>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="showDate" class="date-display">{{ currentDate }}</div>
+  <div *ngIf="isCustomTime" class="custom-time-indicator">Hora Personalizada</div>
+
+  <div class="period-indicator" *ngIf="!is24HourFormat">{{ displayPeriod }}</div>
+</div>

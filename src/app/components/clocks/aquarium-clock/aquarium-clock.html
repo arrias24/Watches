@@ -1,0 +1,56 @@
+<div class="aquarium-clock" [class.custom-time]="isCustomTime">
+  <div class="aquarium-container">
+    <div class="aquarium hour-aquarium">
+      <div class="aquarium-label">HORAS</div>
+      <div class="aquarium-tank">
+        <div class="water-fill" [style.height.%]="hoursWaterLevel"></div>
+        <div class="water-level">{{ displayHours }}</div>
+        <div class="drops-container">
+          <div
+            *ngFor="let drop of hourDrops"
+            class="drop"
+            [style.left.px]="drop.left"
+            [style.animation-delay.ms]="drop.delay"
+          ></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="aquarium minute-aquarium">
+      <div class="aquarium-label">MINUTOS</div>
+      <div class="aquarium-tank">
+        <div class="water-fill" [style.height.%]="minutesWaterLevel"></div>
+        <div class="water-level">{{ displayMinutes }}</div>
+        <div class="drops-container">
+          <div
+            *ngFor="let drop of minuteDrops"
+            class="drop"
+            [style.left.px]="drop.left"
+            [style.animation-delay.ms]="drop.delay"
+          ></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="aquarium second-aquarium">
+      <div class="aquarium-label">SEGUNDOS</div>
+      <div class="aquarium-tank">
+        <div class="water-fill" [style.height.%]="secondsWaterLevel"></div>
+        <div class="water-level">{{ displaySeconds }}</div>
+        <div class="drops-container">
+          <div
+            *ngFor="let drop of secondDrops"
+            class="drop"
+            [style.left.px]="drop.left"
+            [style.animation-delay.ms]="drop.delay"
+          ></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="showDate" class="date-display">{{ currentDate }}</div>
+  <div *ngIf="isCustomTime" class="custom-time-indicator">⚙️ Hora Personalizada</div>
+
+  <div class="period-indicator" *ngIf="!is24HourFormat">{{ displayPeriod }}</div>
+</div>

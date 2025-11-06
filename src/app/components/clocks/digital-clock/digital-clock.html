@@ -1,5 +1,5 @@
 <div class="digital-clock" [class.custom-time]="isCustomTime">
-  <div class="time-display">
-    {{ time }}
-  </div>
+  <div class="time-display">{{ displayTime }}</div>
+  <div *ngIf="showDate" class="date-display">{{ currentDate }}</div>
+  <div *ngIf="isCustomTime" class="custom-time-indicator">Hora Personalizada</div>
 </div>

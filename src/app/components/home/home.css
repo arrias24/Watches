@@ -26,9 +26,10 @@
 
 .container-button {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
-  width: 18%;
+  gap: 10px;
+  width: 30%;
 }
 
 .container-select-time {
@@ -36,7 +37,7 @@
   justify-content: space-between;
   align-items: center;
 
-  width: 35%;
+  width: 60%;
   height: auto;
 }
 
@@ -45,7 +46,8 @@
   justify-content: center;
   align-items: center;
 
-  gap: 10px;
+  width: 30%;
+
   position: relative;
 }
 
@@ -162,8 +164,7 @@
   border-radius: 4px;
 }
 
-.time-display,
-.date-display {
+.indicator {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 24px;
   font-weight: bold;

@@ -1,0 +1,123 @@
+.pomodoro-clock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+}
+
+.clock-container {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.time-circle {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.progress-ring {
+  transform: rotate(-90deg);
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.progress-ring-background {
+  fill: none;
+  stroke: #f0f0f0;
+  stroke-linecap: round;
+}
+
+.progress-ring-circle {
+  fill: none;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.5s ease-in-out;
+}
+
+.hour-circle .progress-ring-circle {
+  stroke: #4eb537;
+  stroke-width: 10;
+}
+
+.minute-circle .progress-ring-circle {
+  stroke: #4c39c6;
+  stroke-width: 8;
+}
+
+.second-circle .progress-ring-circle {
+  stroke: #cb3434;
+  stroke-width: 6;
+}
+
+.time-value {
+  text-align: center;
+  z-index: 10;
+}
+
+.number {
+  display: block;
+  font-size: 24px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bold;
+  color: #333;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.label {
+  display: block;
+  font-size: 12px;
+  color: #333;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.date-display {
+  font-size: 14px;
+  color: #666;
+  text-align: center;
+  margin-top: 10px;
+  font-weight: 500;
+}
+
+.custom-time-indicator {
+  font-size: 12px;
+  color: #fff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #333;
+  padding: 6px 12px;
+  border-radius: 16px;
+  border: 1px solid #282828;
+  font-weight: 500;
+}
+
+.period-indicator {
+  font-size: 16px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bold;
+  color: #7f8c8d;
+  background: #ecf0f1;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.number {
+  transition: all 0.3s ease;
+}
+
+.time-circle:hover .number {
+  transform: scale(1.1);
+  cursor: pointer;
+}

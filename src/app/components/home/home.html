@@ -83,8 +83,12 @@
 
   <div class="container-clock">
     <div class="container-clock-time">
-      <h1 [class]="getDisplayClass()">
-        {{ getDisplayContent() }}
+      <h1 class="mode-indicator">
+        <span *ngIf="showDate" class="indicator">Modo Fecha</span>
+        <span *ngIf="!showDate && isCustomTimeActive" class="custom-mode indicator"
+          >Hora Personalizada</span
+        >
+        <span *ngIf="!showDate && !isCustomTimeActive" class="indicator">Modo Hora Actual</span>
       </h1>
       <div *ngIf="isCustomTimeActive && !showDate" class="clock-status"></div>
     </div>
@@ -92,14 +96,40 @@
     <div class="clock-show">
       <app-digital-clock
         *ngIf="selectedClock.type === 'digital'"
-        [time]="getTimeContent()"
-        [date]="currentDate"
         [showDate]="showDate"
-        [isCustomTime]="isCustomTimeActive && !showDate"
+        [isCustomTime]="isCustomTimeActive"
+        [customTime]="customTime"
       >
       </app-digital-clock>
 
-      <div *ngIf="selectedClock.type !== 'digital'" class="clock-placeholder">
+      <app-analog-clock
+        *ngIf="selectedClock.type === 'analog'"
+        [showDate]="showDate"
+        [isCustomTime]="isCustomTimeActive"
+        [customTime]="customTime"
+      >
+      </app-analog-clock>
+
+      <app-pomodoro-clock
+        *ngIf="selectedClock.type === 'pomodoro'"
+        [showDate]="showDate"
+        [isCustomTime]="isCustomTimeActive"
+        [customTime]="customTime"
+      >
+      </app-pomodoro-clock>
+
+      <app-aquarium-clock
+        *ngIf="selectedClock.type === 'aquarium'"
+        [showDate]="showDate"
+        [isCustomTime]="isCustomTimeActive"
+        [customTime]="customTime"
+      >
+      </app-aquarium-clock>
+
+      <div
+        *ngIf="!['digital', 'analog', 'pomodoro', 'aquarium'].includes(selectedClock.type)"
+        class="clock-placeholder"
+      >
         <div class="selected-clock-info">
           <h2>{{ selectedClock.name }}</h2>
           <p>Tipo: {{ selectedClock.type }}</p>
@@ -116,10 +146,14 @@
           <div class="clock-preview">
             <p>Vista previa del {{ selectedClock.name }}</p>
             <div class="time-details">
-              <p>Hora: {{ currentTime }}</p>
-              <p>Fecha: {{ currentDate }}</p>
+              <p>
+                Modo:
+                <span *ngIf="showDate">Fecha</span>
+                <span *ngIf="!showDate && isCustomTimeActive">Hora Personalizada</span>
+                <span *ngIf="!showDate && !isCustomTimeActive">Tiempo Real</span>
+              </p>
               <p *ngIf="isCustomTimeActive && !showDate" class="custom-time-info">
-                ⚙️ Hora personalizada activa
+                Hora personalizada: {{ customTime }}
               </p>
             </div>
           </div>
