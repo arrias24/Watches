@@ -134,9 +134,19 @@
       >
       </app-binary-clock>
 
+      <app-flower-clock
+        *ngIf="selectedClock.type === 'flower'"
+        [showDate]="showDate"
+        [isCustomTime]="isCustomTimeActive"
+        [customTime]="customTime"
+      >
+      </app-flower-clock>
+
       <div
         *ngIf="
-          !['digital', 'analog', 'pomodoro', 'aquarium', 'binary'].includes(selectedClock.type)
+          !['digital', 'analog', 'pomodoro', 'aquarium', 'binary', 'flower'].includes(
+            selectedClock.type
+          )
         "
         class="clock-placeholder"
       >

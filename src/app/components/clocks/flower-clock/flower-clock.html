@@ -1,0 +1,102 @@
+<div class="flower-clock" [class.custom-time]="isCustomTime">
+  <div class="flowers-garden">
+    <div class="flower hour-flower">
+      <div class="flower-info">
+        <span class="flower-label">Horas</span>
+        <span class="flower-value">{{ displayHours }}</span>
+      </div>
+      <div class="flower-visual">
+        <div class="flower-core">
+          <div class="flower-stamen"></div>
+        </div>
+        <div class="petals-ring">
+          <div
+            *ngFor="let petal of hourPetals; let i = index"
+            class="petal-wrapper"
+            [style.transform]="'rotate(' + i * 30 + 'deg)'"
+          >
+            <div
+              class="petal"
+              [class.fallen]="petal.fallen"
+              [class.falling]="petal.falling"
+              (animationend)="onPetalAnimationEnd('hours', i)"
+            ></div>
+          </div>
+        </div>
+      </div>
+      <div class="flower-ground">
+        <div
+          *ngFor="let fallen of fallenHourPetals"
+          class="fallen-petal"
+          [style.left.px]="fallen.x"
+          [style.animation-delay.ms]="fallen.delay"
+        ></div>
+      </div>
+    </div>
+
+    <div class="flower minute-flower">
+      <div class="flower-info">
+        <span class="flower-label">Minutos</span>
+        <span class="flower-value">{{ displayMinutes }}</span>
+      </div>
+      <div class="flower-visual">
+        <div class="flower-core">
+          <div class="flower-stamen"></div>
+        </div>
+        <div class="petals-ring">
+          <div
+            *ngFor="let petal of minutePetals; let i = index"
+            class="petal-wrapper"
+            [style.transform]="'rotate(' + i * 6 + 'deg)'"
+          >
+            <div
+              class="petal"
+              [class.fallen]="petal.fallen"
+              [class.falling]="petal.falling"
+              (animationend)="onPetalAnimationEnd('minutes', i)"
+            ></div>
+          </div>
+        </div>
+      </div>
+      <div class="flower-ground">
+        <div
+          *ngFor="let fallen of fallenMinutePetals"
+          class="fallen-petal"
+          [style.left.px]="fallen.x"
+          [style.animation-delay.ms]="fallen.delay"
+        ></div>
+      </div>
+    </div>
+
+    <div class="flower second-flower">
+      <div class="flower-info">
+        <span class="flower-label">Segundos</span>
+        <span class="flower-value">{{ displaySeconds }}</span>
+      </div>
+      <div class="flower-visual">
+        <div class="flower-core">
+          <div class="flower-stamen"></div>
+        </div>
+        <div class="petals-ring">
+          <div
+            *ngFor="let petal of secondPetals; let i = index"
+            class="petal-wrapper"
+            [style.transform]="'rotate(' + i * 6 + 'deg)'"
+          >
+            <div
+              class="petal"
+              [class.fallen]="petal.fallen"
+              [class.falling]="petal.falling"
+              (animationend)="onPetalAnimationEnd('seconds', i)"
+            ></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="garden-info">
+    <div *ngIf="showDate" class="date-display">{{ currentDate }}</div>
+    <div *ngIf="isCustomTime" class="custom-time-indicator">Hora Personalizada</div>
+  </div>
+</div>
