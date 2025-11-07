@@ -126,8 +126,18 @@
       >
       </app-aquarium-clock>
 
+      <app-binary-clock
+        *ngIf="selectedClock.type === 'binary'"
+        [showDate]="showDate"
+        [isCustomTime]="isCustomTimeActive"
+        [customTime]="customTime"
+      >
+      </app-binary-clock>
+
       <div
-        *ngIf="!['digital', 'analog', 'pomodoro', 'aquarium'].includes(selectedClock.type)"
+        *ngIf="
+          !['digital', 'analog', 'pomodoro', 'aquarium', 'binary'].includes(selectedClock.type)
+        "
         class="clock-placeholder"
       >
         <div class="selected-clock-info">

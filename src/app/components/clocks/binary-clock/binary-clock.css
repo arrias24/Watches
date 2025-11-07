@@ -1,0 +1,219 @@
+.binary-clock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100px;
+  box-sizing: border-box;
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.binary-container {
+  display: flex;
+  flex-direction: column;
+  background: #1a1a1a;
+  padding: 30px;
+  border-radius: 15px;
+  border: 2px solid #333;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+}
+
+.binary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding: 30px;
+  margin: 10px 0;
+  background: #2d2d2d;
+  border-radius: 10px;
+  border: 1px solid #444;
+  position: relative;
+}
+
+.binary-label {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  min-width: 80px;
+}
+
+.binary-bits {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bit-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.bits {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.bit {
+  position: relative;
+  width: 35px;
+  height: 35px;
+  background: #333;
+  border: 2px solid #555;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  cursor: help;
+}
+
+.bit::before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  right: 2px;
+  bottom: 2px;
+  background: #222;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.bit.active {
+  border-color: #00ff00;
+  box-shadow: 0 0 10px #00ff00, inset 0 0 10px rgba(0, 255, 0, 0.3);
+}
+
+.bit.active::before {
+  background: #00ff00;
+  box-shadow: 0 0 15px #00ff00;
+}
+
+.bit.bit-high.active {
+  border-color: #ff4444;
+  box-shadow: 0 0 10px #ff4444, inset 0 0 10px rgba(255, 68, 68, 0.3);
+}
+
+.bit.bit-high.active::before {
+  background: #ff4444;
+  box-shadow: 0 0 15px #ff4444;
+}
+
+.bit-weight {
+  font-size: 9px;
+  color: #888;
+  position: absolute;
+  top: -15px;
+  font-weight: bold;
+}
+
+.bit.active .bit-weight {
+  color: #fff;
+  text-shadow: 0 0 5px currentColor;
+}
+
+.binary-representation {
+  margin-top: 15px;
+  padding: 15px;
+  background: #252525;
+  border-radius: 8px;
+  border: 1px solid #444;
+}
+
+.representation-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  position: relative;
+}
+
+.representation-row:last-child {
+  margin-bottom: 0;
+}
+
+.rep-label {
+  font-size: 12px;
+  color: #fff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 600;
+}
+
+.rep-value {
+  font-size: 14px;
+  color: #ffffff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  letter-spacing: 1px;
+}
+
+.date-display {
+  width: 250px;
+  font-size: 12px;
+  text-align: center;
+  color: #fff;
+  background: #333;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-weight: 500;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 10px 0;
+}
+
+.custom-time-indicator {
+  width: 150px;
+  font-size: 12px;
+  text-align: center;
+  color: #fff;
+  background: #333;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-weight: 500;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 10px 0;
+}
+
+.period-indicator {
+  font-size: 12px;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  position: absolute;
+  top: -2.5px;
+  right: 70px;
+}
+
+.binary-clock.custom-time .bit.active {
+  border-color: #ff9900;
+  box-shadow: 0 0 10px #ff9900, inset 0 0 10px rgba(255, 153, 0, 0.3);
+}
+
+.binary-clock.custom-time .bit.active::before {
+  background: #ff9900;
+  box-shadow: 0 0 15px #ff9900;
+}
+
+.bit {
+  animation: bitPulse 2s ease-in-out infinite;
+}
+
+@keyframes bitPulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}

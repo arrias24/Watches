@@ -1,0 +1,75 @@
+<div class="binary-clock" [class.custom-time]="isCustomTime">
+  <div class="binary-container">
+    <div class="binary-row">
+      <div class="binary-label">HORAS</div>
+      <div class="binary-bits">
+        <div class="bit-group">
+          <div class="bits">
+            <div
+              *ngFor="let bit of hourBits; let i = index"
+              class="bit"
+              [class.active]="bit === 1"
+              [class.bit-high]="i < 2"
+              [title]="'Valor: ' + (bit === 1 ? getBitWeight(3 - i) : 0)"
+            >
+              <span class="bit-weight">{{ getBitWeight(3 - i) }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="binary-row">
+      <div class="binary-label">MINUTOS</div>
+      <div class="binary-bits">
+        <div class="bit-group">
+          <div class="bits">
+            <div
+              *ngFor="let bit of minuteBits; let i = index"
+              class="bit"
+              [class.active]="bit === 1"
+              [class.bit-high]="i < 3"
+              [title]="'Valor: ' + (bit === 1 ? getBitWeight(5 - i) : 0)"
+            >
+              <span class="bit-weight">{{ getBitWeight(5 - i) }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="binary-row">
+      <div class="binary-label">SEGUNDOS</div>
+      <div class="binary-bits">
+        <div class="bit-group">
+          <div class="bits">
+            <div
+              *ngFor="let bit of secondBits; let i = index"
+              class="bit"
+              [class.active]="bit === 1"
+              [class.bit-high]="i < 3"
+              [title]="'Valor: ' + (bit === 1 ? getBitWeight(5 - i) : 0)"
+            >
+              <span class="bit-weight">{{ getBitWeight(5 - i) }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="binary-representation">
+      <div class="representation-row">
+        <span class="rep-label">Binario:</span>
+        <span class="rep-value">{{ binaryString }}</span>
+      </div>
+      <div class="representation-row">
+        <span class="rep-label">Decimal:</span>
+        <span class="rep-value">{{ displayTime }}</span>
+        <div class="period-indicator" *ngIf="!is24HourFormat">{{ displayPeriod }}</div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="showDate" class="date-display">{{ currentDate }}</div>
+  <div *ngIf="isCustomTime" class="custom-time-indicator">Hora Personalizada</div>
+</div>

@@ -4,11 +4,19 @@ import { DigitalClockComponent } from '../clocks/digital-clock/digital-clock';
 import { AnalogicClock } from '../clocks/analogic-clock/analogic-clock';
 import { PomodoroClock } from '../clocks/pomodoro-clock/pomodoro-clock';
 import { AquariumClock } from '../clocks/aquarium-clock/aquarium-clock';
+import { BinaryClock } from '../clocks/binary-clock/binary-clock';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, DigitalClockComponent, AnalogicClock, PomodoroClock, AquariumClock],
+  imports: [
+    CommonModule,
+    DigitalClockComponent,
+    AnalogicClock,
+    PomodoroClock,
+    AquariumClock,
+    BinaryClock,
+  ],
   templateUrl: './home.html',
   styleUrls: ['./home.css'],
 })
@@ -18,6 +26,7 @@ export class Home implements OnInit {
     { id: 2, name: 'Reloj Analógico', type: 'analog' },
     { id: 3, name: 'Reloj Pomodoro', type: 'pomodoro' },
     { id: 4, name: 'Reloj Acuario', type: 'aquarium' },
+    { id: 5, name: 'Reloj Binario', type: 'binary' },
   ];
 
   selectedClock: any = this.clockTypes[0];
