@@ -4,6 +4,7 @@
   align-items: center;
   gap: 25px;
   padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .aquarium-container {
@@ -22,7 +23,6 @@
 }
 
 .aquarium-label {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 12px;
   font-weight: 600;
   color: #333;
@@ -49,6 +49,7 @@
   background: linear-gradient(to top, rgba(52, 152, 219, 0.3), rgba(52, 152, 219, 0.7));
   transition: height 0.5s ease-in-out;
   border-radius: 4px 4px 0 0;
+  z-index: 2;
 }
 
 .water-fill::before {
@@ -90,8 +91,9 @@
   top: -20px;
   left: 0;
   right: 0;
-  height: 20px;
+  height: calc(100% + 20px);
   pointer-events: none;
+  z-index: 1;
 }
 
 .drop {
@@ -100,7 +102,7 @@
   height: 8px;
   background: linear-gradient(to bottom, #3498db, #2980b9);
   border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-  animation: dropFall 3s linear infinite;
+  animation: dropFall 2s linear infinite;
   opacity: 0.8;
 }
 
@@ -112,11 +114,11 @@
   10% {
     opacity: 0.8;
   }
-  90% {
-    opacity: 0.6;
+  80% {
+    opacity: 0.7;
   }
   100% {
-    transform: translateY(170px) scale(1);
+    transform: translateY(var(--water-level, 170px)) scale(1);
     opacity: 0;
   }
 }
@@ -132,6 +134,7 @@
 
 .hour-aquarium .drop {
   background: linear-gradient(to bottom, #e74c3c, #c0392b);
+  animation-duration: 3s;
 }
 
 .minute-aquarium .aquarium-tank {
@@ -145,6 +148,7 @@
 
 .minute-aquarium .drop {
   background: linear-gradient(to bottom, #3498db, #2980b9);
+  animation-duration: 2s;
 }
 
 .second-aquarium .aquarium-tank {
@@ -158,10 +162,10 @@
 
 .second-aquarium .drop {
   background: linear-gradient(to bottom, #2ecc71, #27ae60);
+  animation-duration: 1s;
 }
 
 .date-display {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 14px;
   color: #666;
   text-align: center;
@@ -171,7 +175,6 @@
 
 .custom-time-indicator {
   font-size: 12px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background: #fff3cd;
   padding: 6px 12px;
   border-radius: 16px;
@@ -181,7 +184,6 @@
 
 .period-indicator {
   font-size: 14px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #7f8c8d;
   background: #ecf0f1;
   padding: 4px 12px;

@@ -81,6 +81,44 @@
     </div>
   </div>
 
+  <div class="sliders-container">
+    <div class="slider-group">
+      <label class="slider-label">Horas: {{ selectedTime.hours }}</label>
+      <input
+        type="range"
+        min="1"
+        max="12"
+        [value]="selectedTime.hours"
+        (input)="onSliderChange('hours', $any($event.target).valueAsNumber)"
+        class="time-slider hours-slider"
+      />
+    </div>
+
+    <div class="slider-group">
+      <label class="slider-label">Minutos: {{ selectedTime.minutes }}</label>
+      <input
+        type="range"
+        min="0"
+        max="59"
+        [value]="selectedTime.minutes"
+        (input)="onSliderChange('minutes', $any($event.target).valueAsNumber)"
+        class="time-slider minutes-slider"
+      />
+    </div>
+
+    <div class="slider-group">
+      <label class="slider-label">Segundos: {{ selectedTime.seconds }}</label>
+      <input
+        type="range"
+        min="0"
+        max="59"
+        [value]="selectedTime.seconds"
+        (input)="onSliderChange('seconds', $any($event.target).valueAsNumber)"
+        class="time-slider seconds-slider"
+      />
+    </div>
+  </div>
+
   <div class="container-clock">
     <div class="container-clock-time">
       <h1 class="mode-indicator">
@@ -142,11 +180,43 @@
       >
       </app-flower-clock>
 
+      <app-days-clock
+        *ngIf="selectedClock.type === 'days'"
+        [showDate]="showDate"
+        [isCustomTime]="isCustomTimeActive"
+        [customTime]="customTime"
+      >
+      </app-days-clock>
+
+      <app-eyes-clock
+        *ngIf="selectedClock.type === 'eyes'"
+        [showDate]="showDate"
+        [isCustomTime]="isCustomTimeActive"
+        [customTime]="customTime"
+      >
+      </app-eyes-clock>
+
+      <app-geometric-clock
+        *ngIf="selectedClock.type === 'geometric'"
+        [showDate]="showDate"
+        [isCustomTime]="isCustomTimeActive"
+        [customTime]="customTime"
+      >
+      </app-geometric-clock>
+
       <div
         *ngIf="
-          !['digital', 'analog', 'pomodoro', 'aquarium', 'binary', 'flower'].includes(
-            selectedClock.type
-          )
+          ![
+            'digital',
+            'analog',
+            'pomodoro',
+            'aquarium',
+            'binary',
+            'flower',
+            'days',
+            'eyes',
+            'geometric'
+          ].includes(selectedClock.type)
         "
         class="clock-placeholder"
       >

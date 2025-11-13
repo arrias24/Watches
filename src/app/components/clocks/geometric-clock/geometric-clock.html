@@ -1,0 +1,52 @@
+<div class="geometric-clock" [class.custom-time]="isCustomTime">
+  <!-- Contenedor principal de formas -->
+  <div class="shapes-container">
+    <!-- Triángulo - Horas -->
+    <div class="shape-container triangle-container">
+      <div class="shape-info">
+        <span class="shape-label">Horas</span>
+        <span class="shape-value">{{ displayHours }}</span>
+      </div>
+      <div class="shape-visual">
+        <div
+          class="triangle"
+          [style.border-left-width.px]="triangleBase / 2"
+          [style.border-right-width.px]="triangleBase / 2"
+          [style.border-bottom-width.px]="triangleHeight"
+          [style.border-bottom-color]="'#e74c3c'"
+        ></div>
+      </div>
+      <div class="growth-bar">
+        <div class="growth-fill" [style.width.%]="hoursProgress"></div>
+      </div>
+    </div>
+
+    <!-- Cuadrado - Minutos -->
+    <div class="shape-container square-container">
+      <div class="shape-info">
+        <span class="shape-label">Minutos</span>
+        <span class="shape-value">{{ displayMinutes }}</span>
+      </div>
+      <div class="shape-visual">
+        <div class="square" [style.width.px]="squareSize" [style.height.px]="squareSize"></div>
+      </div>
+      <div class="growth-bar">
+        <div class="growth-fill" [style.width.%]="minutesProgress"></div>
+      </div>
+    </div>
+
+    <!-- Círculo - Segundos -->
+    <div class="shape-container circle-container">
+      <div class="shape-info">
+        <span class="shape-label">Segundos</span>
+        <span class="shape-value">{{ displaySeconds }}</span>
+      </div>
+      <div class="shape-visual">
+        <div class="circle" [style.width.px]="circleSize" [style.height.px]="circleSize"></div>
+      </div>
+      <div class="growth-bar">
+        <div class="growth-fill" [style.width.%]="secondsProgress"></div>
+      </div>
+    </div>
+  </div>
+</div>

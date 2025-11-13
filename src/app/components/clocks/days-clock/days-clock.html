@@ -1,0 +1,75 @@
+<div class="day-night-clock" [class.night-mode]="isNight" [class.custom-time]="isCustomTime">
+  <div class="sky" [style.background]="skyGradient">
+    <div
+      *ngIf="!isNight"
+      class="celestial-body sun"
+      [style.transform]="'translate(' + sunPosition.x + '%, ' + sunPosition.y + '%)'"
+    >
+      <div class="celestial-glow sun-glow"></div>
+      <div class="sun-rays">
+        <div *ngFor="let ray of sunRays" class="ray" [style.transform]="ray.transform"></div>
+      </div>
+    </div>
+
+    <div
+      *ngIf="isNight"
+      class="celestial-body moon"
+      [style.transform]="'translate(' + moonPosition.x + '%, ' + moonPosition.y + '%)'"
+    >
+      <div class="celestial-glow moon-glow"></div>
+      <div class="moon-craters">
+        <div
+          *ngFor="let crater of moonCraters"
+          class="crater"
+          [style.left.%]="crater.x"
+          [style.top.%]="crater.y"
+          [style.width.px]="crater.size"
+          [style.height.px]="crater.size"
+        ></div>
+      </div>
+    </div>
+
+    <div
+      *ngFor="let cloud of clouds"
+      class="cloud"
+      [style.left.%]="cloud.left"
+      [style.top.%]="cloud.top"
+      [style.animation-delay.s]="cloud.delay"
+      [style.animation-duration.s]="cloud.speed"
+    >
+      <div class="cloud-part"></div>
+      <div class="cloud-part"></div>
+      <div class="cloud-part"></div>
+    </div>
+
+    <div
+      *ngFor="let star of stars"
+      class="star"
+      [style.left.%]="star.x"
+      [style.top.%]="star.y"
+      [style.width.px]="star.size"
+      [style.height.px]="star.size"
+      [style.animation-delay.s]="star.delay"
+      [style.opacity]="starOpacity"
+    ></div>
+  </div>
+
+  <div class="mountains">
+    <div
+      *ngFor="let mountain of mountains"
+      class="mountain"
+      [style.left.%]="mountain.x"
+      [style.height.px]="mountain.height"
+      [style.background]="mountain.color"
+    ></div>
+  </div>
+
+  <div class="ground"></div>
+
+  <div class="time-info">
+    <div class="time-display">{{ displayTime }}</div>
+    <div class="day-period">{{ isNight ? 'Noche' : 'Día' }}</div>
+    <div *ngIf="showDate" class="date-display">{{ currentDate }}</div>
+    <div *ngIf="isCustomTime" class="custom-time-indicator">Hora Personalizada</div>
+  </div>
+</div>

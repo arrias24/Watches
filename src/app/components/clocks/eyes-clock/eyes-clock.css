@@ -1,0 +1,171 @@
+.blinking-eyes-clock {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  padding: 30px;
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  font-family: 'Arial', sans-serif;
+  min-height: 400px;
+}
+
+.eyes-container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  gap: 40px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.eye-pair {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.eye-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #e0e0ff;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.eyes {
+  display: flex;
+  gap: 20px;
+  position: relative;
+}
+
+.eye {
+  position: relative;
+  width: 80px;
+  height: 50px;
+  background: linear-gradient(145deg, #ffffff, #f0f0f0);
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  border: 3px solid #333;
+  overflow: hidden;
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.1), 0 5px 15px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.pupil {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 25px;
+  height: 25px;
+  background: radial-gradient(circle, #000428, #004e92);
+  border-radius: 50%;
+  border: 2px solid #333;
+  transition: transform 0.1s ease-out;
+  z-index: 2;
+}
+
+.pupil::before {
+  content: '';
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 6px;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  z-index: 3;
+}
+
+.eye::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #333;
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.2s ease;
+  z-index: 4;
+}
+
+.eye.blinking::before {
+  animation: blink 0.3s ease;
+}
+
+@keyframes blink {
+  0% {
+    transform: scaleY(0);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+  100% {
+    transform: scaleY(0);
+  }
+}
+
+.eye::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 30% 30%, transparent 10%, rgba(255, 100, 100, 0.1) 20%),
+    radial-gradient(circle at 70% 40%, transparent 10%, rgba(100, 100, 255, 0.1) 20%);
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.hour-eyes .eye {
+  border-color: #ff6b6b;
+}
+
+.minute-eyes .eye {
+  border-color: #4ecdc4;
+}
+
+.second-eyes .eye {
+  border-color: #ffd93d;
+}
+
+.eye-value {
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+.eye:hover {
+  transform: scale(1.05);
+  box-shadow: inset 0 0 30px rgba(255, 255, 255, 0.2), 0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
+.eye-value {
+  animation: heartbeat 2s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.eye:hover .pupil {
+  transform: translate(var(--pupil-x, 0px), var(--pupil-y, 0px)) scale(1.1);
+}

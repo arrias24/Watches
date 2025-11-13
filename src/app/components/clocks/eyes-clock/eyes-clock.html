@@ -1,0 +1,42 @@
+<div class="blinking-eyes-clock" [class.custom-time]="isCustomTime">
+  <div class="eyes-container">
+    <div class="eye-pair hour-eyes">
+      <div class="eye-label">Horas</div>
+      <div class="eyes">
+        <div class="eye" [class.blinking]="hourBlinking" (animationend)="onBlinkEnd('hours')">
+          <div class="pupil" [style.transform]="hourPupilPosition"></div>
+        </div>
+        <div class="eye" [class.blinking]="hourBlinking" (animationend)="onBlinkEnd('hours')">
+          <div class="pupil" [style.transform]="hourPupilPosition"></div>
+        </div>
+      </div>
+      <div class="eye-value">{{ displayHours }}</div>
+    </div>
+
+    <div class="eye-pair minute-eyes">
+      <div class="eye-label">Minutos</div>
+      <div class="eyes">
+        <div class="eye" [class.blinking]="minuteBlinking" (animationend)="onBlinkEnd('minutes')">
+          <div class="pupil" [style.transform]="minutePupilPosition"></div>
+        </div>
+        <div class="eye" [class.blinking]="minuteBlinking" (animationend)="onBlinkEnd('minutes')">
+          <div class="pupil" [style.transform]="minutePupilPosition"></div>
+        </div>
+      </div>
+      <div class="eye-value">{{ displayMinutes }}</div>
+    </div>
+
+    <div class="eye-pair second-eyes">
+      <div class="eye-label">Segundos</div>
+      <div class="eyes">
+        <div class="eye" [class.blinking]="secondBlinking" (animationend)="onBlinkEnd('seconds')">
+          <div class="pupil" [style.transform]="secondPupilPosition"></div>
+        </div>
+        <div class="eye" [class.blinking]="secondBlinking" (animationend)="onBlinkEnd('seconds')">
+          <div class="pupil" [style.transform]="secondPupilPosition"></div>
+        </div>
+      </div>
+      <div class="eye-value">{{ displaySeconds }}</div>
+    </div>
+  </div>
+</div>

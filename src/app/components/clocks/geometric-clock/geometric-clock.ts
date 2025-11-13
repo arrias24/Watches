@@ -4,13 +4,13 @@ import { ClockService } from '../../../services/clock/clock.service';
 import { Subscription, interval } from 'rxjs';
 
 @Component({
-  selector: 'app-aquarium-clock',
+  selector: 'app-geometric-clock',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './aquarium-clock.html',
-  styleUrls: ['./aquarium-clock.css'],
+  templateUrl: './geometric-clock.html',
+  styleUrls: ['./geometric-clock.css'],
 })
-export class AquariumClock implements OnInit, OnDestroy {
+export class GeometricClock implements OnInit, OnDestroy {
   @Input() showDate: boolean = false;
   @Input() isCustomTime: boolean = false;
   @Input() customTime: string = '';
@@ -18,22 +18,19 @@ export class AquariumClock implements OnInit, OnDestroy {
   displayHours: string = '00';
   displayMinutes: string = '00';
   displaySeconds: string = '00';
+  displayTime: string = '00:00:00';
   displayPeriod: string = 'AM';
 
-  hoursWaterLevel: number = 0;
-  minutesWaterLevel: number = 0;
-  secondsWaterLevel: number = 0;
+  triangleBase: number = 120;
+  triangleHeight: number = 104;
+  squareSize: number = 80;
+  circleSize: number = 80;
 
-  hoursWaterPosition: number = 0;
-  minutesWaterPosition: number = 0;
-  secondsWaterPosition: number = 0;
+  hoursProgress: number = 0;
+  minutesProgress: number = 0;
+  secondsProgress: number = 0;
 
   currentDate: string = '';
-  is24HourFormat: boolean = false;
-
-  hourDrops: any[] = [];
-  minuteDrops: any[] = [];
-  secondDrops: any[] = [];
 
   private timeSubscription!: Subscription;
   private customTimeSubscription!: Subscription;
@@ -41,29 +38,11 @@ export class AquariumClock implements OnInit, OnDestroy {
   constructor(private clockService: ClockService) {}
 
   ngOnInit() {
-    this.generateDrops();
     this.updateClock();
   }
 
   ngOnChanges() {
     this.updateClock();
-  }
-
-  private generateDrops() {
-    this.hourDrops = Array.from({ length: 3 }, (_, i) => ({
-      left: 15 + i * 20,
-      delay: i * 2000,
-    }));
-
-    this.minuteDrops = Array.from({ length: 5 }, (_, i) => ({
-      left: 10 + i * 15,
-      delay: i * 800,
-    }));
-
-    this.secondDrops = Array.from({ length: 8 }, (_, i) => ({
-      left: 5 + i * 10,
-      delay: i * 300,
-    }));
   }
 
   private updateClock() {
@@ -76,7 +55,7 @@ export class AquariumClock implements OnInit, OnDestroy {
       });
     } else {
       this.timeSubscription = this.clockService.getCurrentTime().subscribe((time) => {
-        this.updateWaterLevels(time);
+        this.updateShapes(time);
         this.updateCurrentDate();
       });
     }
@@ -100,15 +79,10 @@ export class AquariumClock implements OnInit, OnDestroy {
         hours24 = 0;
       }
 
-      this.updateWaterLevels({
-        hours: hours24,
-        minutes,
-        seconds,
-      });
-
+      this.updateShapes({ hours: hours24, minutes, seconds });
       this.updateCurrentDate();
     } catch (error) {
-      console.error(error);
+      console.error('Error setting custom time:', error);
     }
   }
 
@@ -154,19 +128,29 @@ export class AquariumClock implements OnInit, OnDestroy {
     }
   }
 
-  private updateWaterLevels(time: { hours: number; minutes: number; seconds: number }) {
-    this.displayHours = (time.hours % 12 || 12).toString().padStart(2, '0');
+  private updateShapes(time: { hours: number; minutes: number; seconds: number }) {
+    const displayHours = time.hours % 12 || 12;
+    this.displayHours = displayHours.toString().padStart(2, '0');
     this.displayMinutes = time.minutes.toString().padStart(2, '0');
     this.displaySeconds = time.seconds.toString().padStart(2, '0');
+    this.displayTime = `${this.displayHours}:${this.displayMinutes}:${this.displaySeconds}`;
     this.displayPeriod = time.hours >= 12 ? 'PM' : 'AM';
 
-    this.hoursWaterLevel = ((time.hours % 12) / 12) * 100;
-    this.minutesWaterLevel = (time.minutes / 60) * 100;
-    this.secondsWaterLevel = (time.seconds / 60) * 100;
+    this.updateShapeSizes(time);
+  }
 
-    this.hoursWaterPosition = 150 - (this.hoursWaterLevel / 100) * 150;
-    this.minutesWaterPosition = 150 - (this.minutesWaterLevel / 100) * 150;
-    this.secondsWaterPosition = 150 - (this.secondsWaterLevel / 100) * 150;
+  private updateShapeSizes(time: { hours: number; minutes: number; seconds: number }) {
+    const displayHours = time.hours % 12 || 12;
+
+    this.triangleBase = 60 + displayHours * 10;
+    this.triangleHeight = this.triangleBase * 0.866;
+    this.hoursProgress = (displayHours / 12) * 100;
+
+    this.squareSize = 40 + time.minutes * 1;
+    this.minutesProgress = (time.minutes / 60) * 100;
+
+    this.circleSize = 40 + time.seconds * 1;
+    this.secondsProgress = (time.seconds / 60) * 100;
   }
 
   private updateCurrentDate() {

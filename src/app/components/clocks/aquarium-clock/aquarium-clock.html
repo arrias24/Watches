@@ -11,6 +11,7 @@
             class="drop"
             [style.left.px]="drop.left"
             [style.animation-delay.ms]="drop.delay"
+            [style.--water-level]="hoursWaterPosition + 'px'"
           ></div>
         </div>
       </div>
@@ -27,6 +28,7 @@
             class="drop"
             [style.left.px]="drop.left"
             [style.animation-delay.ms]="drop.delay"
+            [style.--water-level]="minutesWaterPosition + 'px'"
           ></div>
         </div>
       </div>
@@ -43,6 +45,7 @@
             class="drop"
             [style.left.px]="drop.left"
             [style.animation-delay.ms]="drop.delay"
+            [style.--water-level]="secondsWaterPosition + 'px'"
           ></div>
         </div>
       </div>

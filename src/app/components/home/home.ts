@@ -6,6 +6,9 @@ import { PomodoroClock } from '../clocks/pomodoro-clock/pomodoro-clock';
 import { AquariumClock } from '../clocks/aquarium-clock/aquarium-clock';
 import { BinaryClock } from '../clocks/binary-clock/binary-clock';
 import { FlowerClock } from '../clocks/flower-clock/flower-clock';
+import { DaysClock } from '../clocks/days-clock/days-clock';
+import { EyesClock } from '../clocks/eyes-clock/eyes-clock';
+import { GeometricClock } from '../clocks/geometric-clock/geometric-clock';
 
 @Component({
   selector: 'app-home',
@@ -18,6 +21,9 @@ import { FlowerClock } from '../clocks/flower-clock/flower-clock';
     AquariumClock,
     BinaryClock,
     FlowerClock,
+    DaysClock,
+    EyesClock,
+    GeometricClock,
   ],
   templateUrl: './home.html',
   styleUrls: ['./home.css'],
@@ -30,6 +36,9 @@ export class Home implements OnInit {
     { id: 4, name: 'Reloj Acuario', type: 'aquarium' },
     { id: 5, name: 'Reloj Binario', type: 'binary' },
     { id: 6, name: 'Reloj de Flores', type: 'flower' },
+    { id: 7, name: 'Reloj Día/Noche', type: 'days' },
+    { id: 8, name: 'Reloj Ojos Parpadeantes', type: 'eyes' },
+    { id: 9, name: 'Reloj Geométrico', type: 'geometric' },
   ];
 
   selectedClock: any = this.clockTypes[0];
@@ -106,5 +115,13 @@ export class Home implements OnInit {
 
   selectClock(clock: any) {
     this.selectedClock = clock;
+  }
+
+  onSliderChange(field: string, value: number) {
+    this.selectedTime[field] = value;
+
+    if (this.isCustomTimeActive) {
+      this.addCustomTime();
+    }
   }
 }
